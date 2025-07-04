@@ -68,63 +68,55 @@
        
         <!-- Portfolio-->
         <div id="portfolio">
-            <div class="container-fluid p-0">
-                <div class="row g-0">
-                    <div class="container px-4 px-lg-5">
-                        <div class="row gx-4 gx-lg-5 justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <h2 class="text-white-20 mb-4"></p>
-                                <div>
-                                    Pick-ups
-                                </div>   
-                                </h2>
-                                <hr class="divider divider-light" />
-                                <p class="text-white-20 mb-4"></p>
-                            </div>
-                        </div>
-                        <div class="row gx-4 gx-lg-5 justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <p class="text-white-20 mb-4"></p>
-                                <div>
-                                    
-                                </div>   
-                                </p>
-                                <hr class="divider divider-light" />
-                                <p class="text-white-20 mb-4"></p>
-                            </div>
-                        </div>
-                        <img width="640" height="860"
-                         class ="img-fluid" src="assets/Videos/Health + pickups.gif">
-                        <div class="row gx-4 gx-lg-5 justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <h2 class="text-white-20 mb-4"></p>
-                                <div>
-                                    Throwing
-                                </div>   
-                                </h2>
-                                <hr class="divider divider-light" />
-                                <p class="text-white-20 mb-4"></p>
-                            </div>
-                        </div>
-                        <img width="630" height="860"
-                         class ="img-fluid" src="assets/Videos/Throwing.gif"></img>
-                        <div class="row gx-4 gx-lg-5 justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <p class="text-white-20 mb-4"></p>
-                                <div>
-                                    
-                                </div>   
-                                </p>
-                                <hr class="divider divider-light" />
-                                <p class="text-white-20 mb-4"></p>
-                            </div>
-                        </div>
-                        <video controls="controls autoplay"
-                        class ="img-fluid" src="assets/Videos/Trailer_Rohn_Flick.mp4" type= mkv></video>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="container px-4 px-lg-5">
+                <!-- Section: Pick-ups -->
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white-20 mb-4">Pick-ups</h2>
+                        <hr class="divider divider-light" />
+                        <p class="text-white-20 mb-4">
+                            Dit script zorgt ervoor dat een speler gezondheid of armor krijgt wanneer hij een object met de juiste tag oppakt (bijv. een medkit of armor pickup). 
+                            Bij aanraking via een trigger wordt het corresponderende aantal punten toegevoegd aan de speler, en het object verdwijnt daarna uit de scène. 
+                            Het script werkt samen met een PlayerHealth component waarin de waarden voor health en armor worden opgeslagen.
+                        </p>
                     </div>
                 </div>
+                <!-- Centered GIF -->
+                <div class="text-center mb-5">
+                    <img width="640" height="860" class="img-fluid mx-auto d-block" src="assets/Videos/Health + pickups.gif" alt="Health Pickups">
+                </div>
+
+                <!-- Section: Throwing -->
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white-20 mb-4">Throwing</h2>
+                        <hr class="divider divider-light" />
+                        <p class="text-white-20 mb-4">
+                            Dit script laat de speler een beperkt aantal projectielen gooien vanuit een aangewezen punt. 
+                            Bij het indrukken van een ingestelde toets wordt een object gespawned en met kracht vooruit én omhoog geworpen. 
+                            Het gebruikt Rigidbody physics en een cooldown-systeem om herhaald gooien te beperken. 
+                            Het script is volledig configureerbaar via de Unity Inspector.
+                        </p>
+                    </div>
+                </div>
+                <!-- Centered GIF -->
+                <div class="text-center mb-5">
+                    <img width="630" height="860" class="img-fluid mx-auto d-block" src="assets/Videos/Throwing.gif" alt="Throwing Mechanic">
+                </div>
+
+                <!-- Centered Video -->
+                <div class="text-center mb-5">
+                    <video controls autoplay class="img-fluid mx-auto d-block" width="800" height="600">
+                        <source src="assets/Videos/Trailer_Rohn_Flick.mp4" type="video/mp4">
+                    </video>
+                </div>
+
             </div>
         </div>
+    </div>
+</div>
        
         <!-- Contact-->
         <section class="page-section" id="contact">
