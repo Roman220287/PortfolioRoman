@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Portfolio - Roman Agterberg</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="public/css/custom5.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Roman Agterberg</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="About_me.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#portfolio">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 h-100">
+                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 align-self-end">
+                        <h1 class="text-white font-weight-bold">Star Delivery</h1>
+
+                        <hr class="divider" />
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-white-75 mb-5">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- About-->
+        <section class="page-section bg-primary" id="about">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white-20 mb-4"></p>
+                        </div>
+
+                        </h2>
+                        <hr class="divider divider-light" />
+                        <p class="text-white-20 mb-4"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+        <!-- Portfolio-->
+         <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white-20 mb-4"></p>
+                    <div>
+                        Sideways Ship Rotation
+                    </div>   
+                    </h2>
+                    <hr class="divider divider-light" />
+                    <p class="text-white-20 mb-4"></p>
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="text-white-20 mb-4"></p>
+                    <div>
+                        Dit script zorgt voor de zijwaartse rotatie van een ruimteschip op basis van input:
+                        Het luistert naar knoppen via IButtonInput.
+                        Wanneer een rotatieknop wordt ingedrukt, wordt een richting ingesteld (vooruit, achteruit, links of rechts).
+                        In FixedUpdate:
+                        Als een knop wordt vastgehouden, wordt er relatieve torque toegevoegd in die richting en wordt de angularVelocity begrensd tussen een minimale en maximale draaissnelheid.
+                        Als er géén knop wordt ingedrukt, wordt de rotatie soepel afgeremd richting nul met een smoothing factor.
+                        Het script gebruikt een Rigidbody om de fysieke rotatie uit te voeren.
+                    </div>   
+                    </p>
+                    <hr class="divider divider-light" />
+                    <p class="text-white-20 mb-4"></p>
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white-20 mb-4"></p>
+                    <div>
+                        Fuel Depletion
+                    </div>   
+                    </h2>
+                    <hr class="divider divider-light" />
+                    <p class="text-white-20 mb-4"></p>
+                </div>
+            </div>
+             <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="text-white-20 mb-4"></p>
+                    <div>
+                       Het script beheert een brandstofsysteem:
+                       De brandstof daalt constant (1% per seconde) en wordt weergegeven via een TMP-tekst.
+                       Wanneer de brandstof op raakt, verschijnt een SOS-scherm en wordt het object stilgezet (Rigidbody wordt kinematic).
+                       Als de speler op de X-knop drukt terwijl er geen brandstof is, start een herstelproces:
+                       De binnenste sphere fade naar zwart.
+                       Na een korte wachttijd wordt het object naar de positie van een groter schip verplaatst.
+                       De sphere fade weer transparant.
+                       De brandstof wordt weer op 100% gezet en het SOS-scherm verdwijnt.
+                       Het script luistert naar input via een geïmplementeerde OnButton methode.
+                    </div>   
+                    </p>
+                    <hr class="divider divider-light" />
+                    <p class="text-white-20 mb-4"></p>
+                </div>
+            </div>
+            
+        </div>
+       
+        <!-- Contact-->
+        <section class="page-section" id="contact">
+         <div class="text-center mt-4">
+                 <a 
+                  href="https://github.com/Roman220287/Portfolio_code/tree/main/Star%20Delivery" 
+                  target="_blank" 
+                  class="btn btn-dark btn-lg"
+                  >
+                      View code on GitHub
+                 </a>
+            </div>
+              
+        <!-- Footer-->
+      
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
+

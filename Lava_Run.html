@@ -8,6 +8,10 @@
         <title>Portfolio - Roman Agterberg</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
+        <!-- Prism syntax highlighting -->
+        <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-csharp.min.js"></script>
         <!-- Bootstrap Icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Google fonts-->
@@ -17,6 +21,33 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="public/css/custom3.css" rel="stylesheet" />
+        <style>
+        .code-tab {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .code-tab summary {
+          cursor: pointer;
+          font-weight: 600;
+          padding: 0.75rem 1rem;
+          background-color: #212529;
+          color: #ffffff;
+          border-radius: 0.375rem;
+          user-select: none;
+        }
+
+        .code-tab summary:hover {
+          background-color: #343a40;
+        }
+ 
+        .code-tab pre {
+          margin-top: 0.75rem;
+          border-radius: 0.375rem;
+          overflow-x: auto;
+          text-align: left;
+        }
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -95,10 +126,89 @@
                     <p class="text-white-20 mb-4"></p>
                 </div>
             </div>
-            <div class="text-center mb-5">
-                 <img width="640" height="860"
-                 class ="img-fluid" src="public/assets/img/portfolio/fullsize/Speedometer.png">
-            </div>
+            <details class="code-tab mt-4">
+                  <summary>Show speedometer script</summary>
+                  <pre><code class="language-csharp">
+                    public class Speedometer : MonoBehaviour
+                    {
+                         public Car car;
+
+                         private float _maxSpeedAngle = -20;
+                         private float _zeroSpeedAngle = 210;
+
+                         private Transform _needleTransform;
+                         private Transform _speedlabelTemplateTransform;
+
+                         private float _speedMax;
+                         private float _speed;
+                         void Start()
+                         {
+                             _needleTransform = transform.Find("needle");
+                             _speedlabelTemplateTransform = transform.Find("speedlabelTemplate");
+                             _speedlabelTemplateTransform.gameObject.SetActive(false);
+
+                             _speed = 0f;
+                             _speedMax = car.MaxSpeed;
+
+                             CreateSpeedLabels();
+                         }
+
+                         void Update()
+                         {
+                             if (Input.GetKey(KeyCode.W))
+                             { 
+                                 _speed += car.currentSpeed * Time.deltaTime;
+                             }
+
+                             if (Input.GetKey(KeyCode.S))
+                             {
+                                 _speed -= car.currentSpeed * Time.deltaTime;
+                             }
+
+                             if (Input.GetKey(KeyCode.Space))
+                             {
+                                 _speed -= car.currentSpeed * Time.deltaTime;
+                             }
+
+                             if (_speed > _speedMax)
+                             {
+                                 _speed = _speedMax;
+                             }
+
+                             _needleTransform.eulerAngles = new Vector3(0, 0, GetSpeedRotation());
+
+                             _speed = Mathf.Clamp(_speed, 0f, _speedMax);
+                         }
+
+                         private void CreateSpeedLabels()
+                         {
+                             int labelAmount = 10;
+
+                             float totalAngleSize = _zeroSpeedAngle - _maxSpeedAngle;
+
+                             for (int i = 0; i <= labelAmount; i++)
+                             {
+                                 Transform speedLabelTransform = Instantiate(_speedlabelTemplateTransform, transform);
+                                 float labelSpeedNormalized = (float)i / labelAmount;
+                                 float speedLabelAngle = _zeroSpeedAngle - labelSpeedNormalized * totalAngleSize;
+                                 speedLabelTransform.eulerAngles = new Vector3(0, 0, speedLabelAngle);
+                                 speedLabelTransform.Find("speedText").GetComponent<TMP_Text>().text = Mathf.RoundToInt(labelSpeedNormalized * _speedMax).ToString();
+                                 speedLabelTransform.Find("speedText").eulerAngles = Vector3.zero;
+                                 speedLabelTransform.gameObject.SetActive(true);
+                             }
+                         }
+
+                         private float GetSpeedRotation()
+                         {
+                             float totalAngleSize = _zeroSpeedAngle - _maxSpeedAngle;
+
+                             float speedNormalized = _speed / _speedMax;
+
+                             return _zeroSpeedAngle - speedNormalized * totalAngleSize;
+                         }
+                     }
+                  </code></pre>
+            </details>
             
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 text-center">
@@ -124,10 +234,81 @@
                     <p class="text-white-20 mb-4"></p>
                 </div>
             </div>
-            <div class="text-center mb-5">
-                 <img width="640" height="860"
-                 class ="img-fluid" src="public/assets/img/portfolio/fullsize/TimeSaving.png"></img>
-            </div>
+            <details class="code-tab mt-4">
+                  <summary>Show Time Save script</summary>
+                     <pre><code class="language-csharp">
+                        public class TimerSaveTest : MonoBehaviour
+                        {
+                             public Timer timer;
+                             private void OnTriggerEnter(Collider other)
+                             {
+                                 PlayerPrefs.SetFloat("finishedTime", timer._currentTime);
+                             }
+                        }
+                     </code></pre>
+            </details>
+            <details class="code-tab mt-4">
+                  <summary>Show Timer script</summary>
+                     <pre><code class="language-csharp">
+                        public class Timer : MonoBehaviour
+                        {
+                             public TMP_Text timer;
+                             public float totalTime = 60.0f;
+                             public GameObject gameoverMenu;
+                             public float _currentTime;
+                             public bool levelCompleted;
+
+
+                             void Start()
+                             {
+                                 _currentTime = totalTime;
+                                 UpdateTimerText();
+                             }
+
+                             void Update()
+                             {
+                                 if (GameManager.instance.vulcanoCutSceneHappend)
+                                 {
+                                     StartTimer();
+                                 }
+                             }
+
+                             void StartTimer()
+                             {
+                                 if (_currentTime > 0)
+                                 {
+                                     _currentTime -= Time.deltaTime;
+                                     UpdateTimerText();
+                                 }
+
+                                 else
+                                 {
+                                     _currentTime = 0;
+                                 }
+
+                                 if (_currentTime == 0)
+                                 {
+                                     gameoverMenu.SetActive(true);
+                                 }
+                             }
+
+                             //public void StopTimer()
+                             //{
+                             //    levelCompleted = true;
+                             //}
+
+                             void UpdateTimerText()
+                             {
+                                 //if (!levelCompleted)
+                                 //{
+                                 int minutes = Mathf.FloorToInt(_currentTime / 60);
+                                 int seconds = Mathf.FloorToInt(_currentTime % 60);
+                                 timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                                 //}
+                             }
+                        }
+                     </code></pre>
+            </details>
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 text-center">
                     <p class="text-white-20 mb-4"></p>
@@ -143,6 +324,15 @@
        
         <!-- Contact-->
         <section class="page-section" id="contact">
+            <div class="text-center mt-4">
+                 <a 
+                  href="https://github.com/Roman220287/Portfolio_code/tree/main/Lava%20Run" 
+                  target="_blank" 
+                  class="btn btn-dark btn-lg"
+                  >
+                      View code on GitHub
+                 </a>
+            </div>
          
               
         <!-- Footer-->

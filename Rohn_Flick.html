@@ -6,6 +6,10 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Portfolio - Roman Agterberg</title>
+        <!-- Prism syntax highlighting -->
+        <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-csharp.min.js"></script>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
         <!-- Bootstrap Icons-->
@@ -17,6 +21,33 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="public/css/custom2.css" rel="stylesheet" />
+        <style>
+        .code-tab {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .code-tab summary {
+          cursor: pointer;
+          font-weight: 600;
+          padding: 0.75rem 1rem;
+          background-color: #212529;
+          color: #ffffff;
+          border-radius: 0.375rem;
+          user-select: none;
+        }
+
+        .code-tab summary:hover {
+          background-color: #343a40;
+        }
+ 
+        .code-tab pre {
+          margin-top: 0.75rem;
+          border-radius: 0.375rem;
+          overflow-x: auto;
+          text-align: left;
+        }
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -95,6 +126,41 @@
                     <img width="640" height="860" class="img-fluid mx-auto d-block" src="public/assets/Videos/Health + pickups.gif" alt="Health Pickups">
                 </div>
 
+                <details class="code-tab mt-4">
+                  <summary>Show Pickups script</summary>
+                     <pre><code class="language-csharp">
+                        public class Pickups : MonoBehaviour
+                        {
+                             [SerializeField] private PlayerHealth playerHealth;
+                             [SerializeField] private int healing;
+                             [SerializeField] private int addArmor;
+
+                             private void OnTriggerEnter(Collider other)
+                             {
+                                 //Health PickUp
+                                 if (other.gameObject.CompareTag("Medkit"))
+                                 {
+                                     //if (playerHealth.health < 5)
+                                     //{
+                                         playerHealth.health += healing;
+                                         Destroy(other.gameObject);
+                                     //}
+                                 }
+
+                                 //ArmorPickUp
+                                 if (other.gameObject.CompareTag("Armor PickUp"))
+                                 {
+                                     //if (playerHealth.armor < 5)
+                                     //{
+                                         playerHealth.armor += addArmor;
+                                         Destroy(other.gameObject);
+                                     //}
+                                 }
+                             }
+                        }
+                     </code></pre>
+            </details>
+
                 <!-- Section: Throwing -->
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 text-center">
@@ -113,6 +179,60 @@
                     <img width="630" height="860" class="img-fluid mx-auto d-block" src="public/assets/Videos/Throwing.gif" alt="Throwing Mechanic">
                 </div>
 
+                <details class="code-tab mt-4">
+                  <summary>Show Throwing script</summary>
+                     <pre><code class="language-csharp">
+                        public class Throwing : MonoBehaviour
+                        {
+                             [SerializeField] private Transform player;
+                             [SerializeField] private Transform attackPoint;
+                             [SerializeField] private GameObject objectToThrow;
+                             [SerializeField] private int totalThrows;
+                             [SerializeField] private float throwCooldown;
+                             [SerializeField] private KeyCode throwKey;
+                             [SerializeField] private float throwForce;
+                             [SerializeField] private float throwUpwardForce;
+
+                             bool readyToThrow;
+
+                             void Start()
+                             {
+                                 readyToThrow = true;
+                             }
+
+                             void Update()
+                             {
+                                 if (Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0)
+                                 {
+                                     Throw();
+                                 }
+                             }
+
+                             private void Throw()
+                             {
+                                 readyToThrow = false;
+
+                                 GameObject projectiles = Instantiate(objectToThrow, attackPoint.position, player.rotation);
+
+                                 Rigidbody projectileRb = projectiles.GetComponent<Rigidbody>();
+
+                                 Vector3 forceToAdd = player.transform.forward * throwForce + transform.up * throwUpwardForce;
+
+                                 projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
+
+                                 totalThrows--;
+
+                                 Invoke(nameof(ResetThrow), throwCooldown);
+                             }
+
+                             private void ResetThrow()
+                             {
+                                 readyToThrow = true;
+                             }
+                        }
+                     </code></pre>
+            </details>
+
               
 
             </div>
@@ -122,6 +242,15 @@
        
         <!-- Contact-->
         <section class="page-section" id="contact">
+            <div class="text-center mt-4">
+                 <a 
+                  href="https://github.com/Roman220287/Portfolio_code/tree/main/Rohn%20Flick" 
+                  target="_blank" 
+                  class="btn btn-dark btn-lg"
+                  >
+                      View code on GitHub
+                 </a>
+            </div>
          
               
         <!-- Footer-->

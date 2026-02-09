@@ -5,7 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        
         <title>Portfolio - Roman Agterberg</title>
+        <!-- Prism syntax highlighting -->
+        <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-csharp.min.js"></script>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
         <!-- Bootstrap Icons-->
@@ -17,6 +22,33 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="public/css/custom.css" rel="stylesheet" />
+        <style>
+        .code-tab {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .code-tab summary {
+          cursor: pointer;
+          font-weight: 600;
+          padding: 0.75rem 1rem;
+          background-color: #212529;
+          color: #ffffff;
+          border-radius: 0.375rem;
+          user-select: none;
+        }
+
+        .code-tab summary:hover {
+          background-color: #343a40;
+        }
+ 
+        .code-tab pre {
+          margin-top: 0.75rem;
+          border-radius: 0.375rem;
+          overflow-x: auto;
+          text-align: left;
+        }
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -99,10 +131,205 @@
                     <p class="text-white-20 mb-4"></p>
                 </div>
             </div>
-            <div class="text-center mb-5">
-                 <img width="640" height="860"
-                 class ="img-fluid" src="public/assets/img/portfolio/fullsize/Customer.png">
-            </div>
+                <details class="code-tab mt-4">
+                  <summary>Show customer script</summary>
+                  <pre><code class="language-csharp">
+                     // Customer behavior script
+                     public class Customer : MonoBehaviour
+                     {
+                      public enum PotionRequestType { Single, Double }
+                      public PotionRequestType Request_Type = PotionRequestType.Single;
+
+                      public string Requested_Potion1;
+                      public string Requested_Potion2;
+
+
+                      private bool Received_Potion1 = false;
+                      private bool Received_Potion2 = false;
+                      private bool Has_Received_All = false;
+                      private bool Is_Front = false;
+
+                      public float Patience_Time = 10f;
+                      public float Timer = 0f;
+   
+
+                      [SerializeField] private Customer_Line_Advance _Advance;
+                      [SerializeField] private Transform Request_Display_Parent;
+                      [SerializeField] private GameObject Speech_Bubble;
+                      [SerializeField] private GameObject Love_Potion;
+                      [SerializeField] private GameObject Health_Potion;
+                      [SerializeField] private GameObject Growth_Potion;
+                      [SerializeField] private GameObject Poison_Potion;
+
+                      [SerializeField] private Slider PatienceSlider;
+
+                      [SerializeField] private AudioSource audioSource;
+                      [SerializeField] private AudioClip thanks;
+                      [SerializeField] private AudioClip no;
+
+                      private void Awake()
+                      {
+                         PatienceSlider = GetComponentInChildren<Slider>();
+                         if (PatienceSlider == null)
+                         {
+                             Debug.LogWarning("PatienceSlider not found in prefab!");
+                         }
+                      }
+
+                      public void SetLineManager(Customer_Line_Advance advance)
+                      {
+                          _Advance = advance;
+                      }
+
+                      public void SetAsFrontCustomer(bool value)
+                      {
+                         Is_Front = value;
+                         if (Is_Front)
+                          {
+                              Timer = Patience_Time;
+                              Speech_Bubble.SetActive(true);
+                              PatienceSlider.gameObject.SetActive(true);
+                              ShowPotionRequests();
+                          }
+
+                         else
+                          {
+                              Speech_Bubble.SetActive(false);
+                              PatienceSlider.gameObject.SetActive(false);
+                          }
+                      }
+
+
+                      private void Update()
+                      {
+                         if (!Is_Front)
+                         {
+                             return;
+                         }
+
+                         if (Timer > 0f)
+                         {
+                             Timer -= Time.deltaTime;
+
+                             if (PatienceSlider != null)
+                              {
+                                  PatienceSlider.value = Timer;
+                              }
+                         }
+      
+
+                         if (Timer <= 0f)
+                         {
+                             Debug.Log("Customer: I'm tired of waiting!");
+                             dayfailure.Instance.CustomerFailed();
+                             _Advance.ServeFrontCustomer();
+                         }
+                      }
+                      private void ShowPotionRequests()
+                      {
+                          if (Request_Display_Parent == null) return;
+
+                          GameObject icon1 = GetIconForPotion(Requested_Potion1);
+                          if (icon1 != null)
+                          {
+                              Instantiate(icon1, Request_Display_Parent.position + Vector3.left * 0.2f, icon1.transform.rotation, Request_Display_Parent);
+                          }
+
+                          if (Request_Type == PotionRequestType.Double)
+                          {
+                              GameObject icon2 = GetIconForPotion(Requested_Potion2);
+                          }    
+                          if (icon2 != null)
+                          {
+                             Instantiate(icon2, Request_Display_Parent.position + Vector3.right * 0.2f, icon2.transform.rotation, Request_Display_Parent);
+                          }
+                      }
+                     
+
+                      private GameObject GetIconForPotion(string potionTag)
+                      {
+                         switch (potionTag)
+                         {
+                              case "Health potion": return Health_Potion;
+                              case "Mana potion": return Love_Potion;
+                              case "Growth potion": return Growth_Potion;
+                              case "Poison potion": return Poison_Potion;
+                              default: return null;
+                         }
+                      }
+
+                      private void OnTriggerEnter(Collider other)
+                      {
+                          if (other.CompareTag("hand"))
+                          {
+                              return;
+                          }
+
+                          if (Has_Received_All)
+                          {
+                              Debug.Log("Customer: I've already got what I need.");
+                              return;
+                          }
+
+                          bool potionMatched = false;
+
+                          if (Request_Type == PotionRequestType.Single)
+                          {
+                              if (other.CompareTag(Requested_Potion1))
+                              {
+                                  potionMatched = true;
+                                  Has_Received_All = true;
+                                  Debug.Log("Customer: That's just what I needed!");
+                                  audioSource.clip = thanks;
+                                  audioSource.Play();
+                                  _Advance.ServeFrontCustomer();
+
+                              }
+                          }
+                          else if (Request_Type == PotionRequestType.Double)
+                          {
+                              if (!Received_Potion1 && other.CompareTag(Requested_Potion1))
+                              {
+                                  Received_Potion1 = true;
+                                  potionMatched = true;
+                                  audioSource.clip = thanks;
+                                  audioSource.Play();
+                                  Debug.Log("Customer: Thanks! One down.");
+                              }
+                              else if (!Received_Potion2 && other.CompareTag(Requested_Potion2))
+                              {
+                                  Received_Potion2 = true;
+                                  potionMatched = true;
+                                  audioSource.clip = thanks;
+                                  audioSource.Play();
+                                  Debug.Log("Customer: Great! That’s the second one.");
+                              }
+
+                              if (Received_Potion1 && Received_Potion2 && !Has_Received_All)
+                              {
+                                  Has_Received_All = true;
+                                  Debug.Log("Customer: Both potions done!");                
+                                  _Advance.ServeFrontCustomer();
+                              }
+                          }
+
+                          if (potionMatched)
+                          {
+                              Destroy(other.gameObject);
+                          }
+                          else
+                          {
+                              audioSource.clip = no;
+                              audioSource.Play();
+                              Debug.Log("Customer: That's not the potion I asked for.");
+                          }
+                      }
+
+   
+                     } 
+                  </code></pre>
+            </details>
+  
             
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 text-center">
@@ -128,10 +355,69 @@
                     <p class="text-white-20 mb-4"></p>
                 </div>
             </div>
-            <div class="text-center mb-5">
-                 <img width="640" height="860"
-                 class ="img-fluid" src="public/assets/img/portfolio/fullsize/Day_Fail.png"></img>
-            </div>
+            <details class="code-tab mt-4">
+                  <summary>Show Day Failure Script</summary>
+                  <pre><code class="language-csharp">
+                    public class dayfailure : MonoBehaviour
+                    {
+                         public static dayfailure Instance;
+
+                         [SerializeField] private Customer_Line_Advance Advance;
+                         [SerializeField] private GameObject Game_Over_Thing;
+
+                         public int failedCustomers = 0;
+                         public int maxFailures = 3;
+
+                         private IEnumerator RestartDayAfterDelay()
+                         {
+                             yield return new WaitForSeconds(5f);
+
+                             ResetCurrentDay();
+                         }
+
+                         public void CustomerFailed()
+                         {
+                             failedCustomers++;
+                             Debug.Log("Customer failed! Total fails: " + failedCustomers);
+                             
+
+                             if (failedCustomers >= maxFailures)
+                             {
+                                 TriggerGameOver();
+                             }
+                         }
+                         private void Awake()
+                         {
+                             if (Instance == null)
+                             Instance = this;
+                             else
+                             Destroy(gameObject);
+                         }
+
+                         private void TriggerGameOver()
+                         {
+                             Debug.Log("GAME OVER");
+                             Game_Over_Thing.SetActive(true);
+
+                             StartCoroutine(RestartDayAfterDelay());
+                         }
+
+                         public void ResetCurrentDay()
+                         {
+                             Debug.Log("Resetting current day...");
+                             failedCustomers = 0;
+
+                             if (Game_Over_Thing != null)
+                             Game_Over_Thing.SetActive(false);
+
+                             if (Advance != null)
+                             {
+                                 Advance.RestartCurrentDay();
+                             }
+                         }
+                    }
+                  </code></pre>
+            </details>
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 text-center">
                     <p class="text-white-20 mb-4"></p>
@@ -148,6 +434,15 @@
        
         <!-- Contact-->
         <section class="page-section" id="contact">
+            <div class="text-center mt-4">
+                 <a 
+                  href="https://github.com/Roman220287/Portfolio_code/tree/main/Alchemix" 
+                  target="_blank" 
+                  class="btn btn-dark btn-lg"
+                  >
+                      View code on GitHub
+                 </a>
+            </div>
          
               
         <!-- Footer-->
