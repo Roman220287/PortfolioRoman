@@ -19,6 +19,32 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="public/css/custom.css" rel="stylesheet" />
     </head>
+    <script>
+     document.addEventListener("DOMContentLoaded", () => {
+         const toggleBtn = document.getElementById("darkModeToggle");
+         const body = document.body;
+
+         if (!toggleBtn) return;
+
+         if (localStorage.getItem("theme") === "dark") {
+             body.classList.add("dark-mode");
+             toggleBtn.textContent = "☀️";
+            }
+
+         toggleBtn.addEventListener("click", () => {
+             body.classList.toggle("dark-mode");
+
+             if (body.classList.contains("dark-mode")) {
+              localStorage.setItem("theme", "dark");
+              toggleBtn.textContent = "☀️";
+             } 
+             else {
+              localStorage.setItem("theme", "light");
+              toggleBtn.textContent = "🌙";
+             }
+         });
+     });
+    </script>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
