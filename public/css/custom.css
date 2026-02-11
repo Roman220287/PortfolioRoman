@@ -20353,11 +20353,6 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
 }
 
-.bg-primary {
-  --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
-}
-
 .bg-secondary {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
@@ -23240,15 +23235,15 @@ header.masthead h1, header.masthead .h1 {
 
 /* Lava Run */
 .project-lavarun {
-  --accent-color: #0ea5e9;
+  --accent-color: #f97316;
   --accent-color-hover: #0284c7;
   --hero-image: url("../assets/img/portfolio/fullsize/Lava Run4.png");
 }
 
 /* Rohn Flick */
 .project-rohnflick {
-  --accent-color: #f97316;
-  --accent-color-hover: #ea580c;
+  --accent-color: #36d1a5;
+  --accent-color-hover: #115e59;
   --hero-image: url("../assets/img/portfolio/fullsize/Rohn Filck.png");
 }
 
@@ -23264,4 +23259,15 @@ header.masthead h1, header.masthead .h1 {
   --accent-color: #f97316;
   --accent-color-hover: #ea580c;
   --hero-image: url("../assets/img/portfolio/fullsize/Star Delivery.png");
+}
+
+/* About me */
+.page-aboutme {
+  --accent-color: #f97216;
+  --accent-color-hover: #ae580c;
+  --hero-image: url("../assets/img/photo (2).jpg") ;
+}
+
+#about {
+  background-color: var(--accent-color) !important;
 }
