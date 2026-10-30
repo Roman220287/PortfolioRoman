@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Portfolio - Roman Agterberg</title>
+    <!-- Prism syntax highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-csharp.min.js"></script>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css" />
+    <!-- SimpleLightbox plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="public/css/custom.css" rel="stylesheet" />
+    <style>
+        .code-tab {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .code-tab summary {
+            cursor: pointer;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            background-color: #212529;
+            color: #ffffff;
+            border-radius: 0.375rem;
+            user-select: none;
+        }
+
+        .code-tab summary:hover {
+            background-color: #343a40;
+        }
+
+        .code-tab pre {
+            margin-top: 0.75rem;
+            border-radius: 0.375rem;
+            overflow-x: auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleBtn = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        if (!toggleBtn) return;
+
+        if (localStorage.getItem("theme") === "dark") {
+            body.classList.add("dark-mode");
+            toggleBtn.textContent = "☀️";
+        }
+
+        toggleBtn.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+                toggleBtn.textContent = "☀️";
+            }
+            else {
+                localStorage.setItem("theme", "light");
+                toggleBtn.textContent = "🌙";
+            }
+        });
+    });
+</script>
+
+<body class="project-picto">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="index.html">Roman Agterberg</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="About_me.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#portfolio">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-3">
+                        <button id="darkModeToggle" class="btn btn-outline-light btn-sm">
+                            🌙
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-end">
+                    <h1 class="text-black font-weight-bold">Picto</h1>
+
+                    <hr class="divider" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-black mb-5">
+                        Dit was een groeps project met een andere dev en vier artists.
+                        Voor dit project hadden we acht weken om een project naar onze keuze te maken.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- About-->
+    <section class="page-section bg-primary" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white-20 mb-4">
+                        Spawn Drop Effect
+                    </h2>
+                    <hr class="divider divider-light" />
+                    <p class="text-white-20 mb-4">
+                        Tijdens dit project heb ik vooral aan de gameloop gewerkt.
+                        Neem een kijkje hier onder naar een paar code snippits en de trailer van de game.
+                    </p>
+                </div>
+                <p class="text-white-20 mb-4"></p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Portfolio-->
+    <div class="text-center mb-5">
+       <iframe width="560" height="315" src="https://www.youtube.com/watch?v=4PJz2R37dtM" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+          
+    </div>
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white-20 mb-4">
+                    </p>
+                    <div>
+                        Spawn Drop Effect
+                    </div>
+                </h2>
+                <hr class="divider divider-light" />
+                <p class="text-white-20 mb-4"></p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <p class="text-white-20 mb-4"></p>
+                <div>
+                    Dit script zorgt ervoor dat vijanden vanuit de lucht worden gespawned. 
+                    Ze zakken eerst langzaam naar beneden, vallen vervolgens op de grond en activeren daarna hun AI en beweging. 
+                    Een Line Renderer zorgt voor het visuele spawn-effect.
+                </div>
+                </p>
+                <hr class="divider divider-light" />
+                <p class="text-white-20 mb-4"></p>
+            </div>
+        </div>
+        <details class="code-tab mt-4">
+            <summary>Show Spawn Drop Effect Script</summary>
+            <pre><code class="language-csharp">
+               [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
+               public class SpawnDropEffect : MonoBehaviour
+               {
+                  [Header("Spawn Drop Settings")]
+                  public float spawnHeight = 8f;
+                  public float slowDescendDuration = 1.5f;
+                  public float releaseHeight = 2f;
+                  public float extraFallForce = 10f;
+                  public float landingCheckDistance = 0.2f;
+                  public float landingSettleTime = 0.2f;
+
+                  [Header("String Visual")]
+                  public bool showString = true;
+                  public Material stringMaterial;
+                  public float stringWidth = 0.05f;
+
+                  private NavMeshAgent agent;
+                  private Rigidbody rb;
+                  private EnemyBase enemyAI;
+                  private LineRenderer lineRenderer;
+
+                  private Vector3 groundPosition;
+                  private float startY;
+                  private float releaseY;
+                  private float descendStartTime;
+                  private bool isDescending;
+                  private bool isDropping;
+                  private bool hasLanded;
+                  private float landTime;
+                  private bool initialized;
+
+                  private void Awake()
+                  {
+                      // haal de benodigde componenten op en schakel ze uit totdat de vijand is geland
+                      agent = GetComponent<NavMeshAgent>();
+                      rb = GetComponent<Rigidbody>();
+                      enemyAI = GetComponent<EnemyBase>();
+                      if (enemyAI == null)
+                          enemyAI = GetComponentInChildren<EnemyBase>();
+
+                      if (agent != null)
+                          agent.enabled = false;
+
+                      if (rb != null)
+                      {
+                          rb.isKinematic = true;
+                          rb.useGravity = false;
+                      }
+
+                      if (enemyAI != null)
+                          enemyAI.enabled = false;
+
+                      SetupLineRenderer();
+                  }
+
+                  private void SetupLineRenderer()
+                  {
+                      // zet de lijnrenderer op die de spawnpositie verbindt met de vijand
+                      if (!showString) return;
+
+                      lineRenderer = gameObject.GetComponent<LineRenderer>();
+                      if (lineRenderer == null)
+                          lineRenderer = gameObject.AddComponent<LineRenderer>();
+
+                      lineRenderer.positionCount = 2;
+                      lineRenderer.useWorldSpace = true;
+                      lineRenderer.widthMultiplier = stringWidth;
+                      lineRenderer.material = stringMaterial != null
+                          ? stringMaterial
+                          : new Material(Shader.Find("Sprites/Default"));
+                      lineRenderer.startColor = Color.white;
+                      lineRenderer.endColor = Color.white;
+                  }
+
+                  public void Initialize(Vector3 targetGround)
+                  {
+                      // stel de spawnpositie en de grondpositie in, en begin het langzaam zakken
+                      groundPosition = targetGround;
+                      Vector3 spawnPosition = targetGround + Vector3.up * spawnHeight;
+                      transform.position = spawnPosition;
+
+                      startY = spawnPosition.y;
+                      releaseY = targetGround.y + releaseHeight;
+                      descendStartTime = Time.time;
+                      isDescending = true;
+                      isDropping = false;
+                      hasLanded = false;
+                      landTime = 0f;
+                      initialized = true;
+                  }
+
+                  private void Update()
+                  {
+                      // als de game op pauze staat of niet geïnitialiseerd is, doe niets
+                      if (PauseManager.IsPaused) return;
+                      if (!initialized) return;
+
+                      // laat de vijand langzaam zakken tot het releaseHeight, daarna laat het vallen
+                      if (isDescending)
+                      {
+                          float elapsed = Time.time - descendStartTime;
+                          float t = Mathf.Clamp01(elapsed / slowDescendDuration);
+                          float currentY = Mathf.Lerp(startY, releaseY, t);
+                          transform.position = new Vector3(transform.position.x, currentY, transform.position.z);
+
+                          if (t >= 1f)
+                          {
+                              StartDrop();
+                          }
+                      }
+                      else if (isDropping)
+                      {
+                          if (rb == null) return;
+
+                          if (rb.linearVelocity.y < 0f)
+                              rb.AddForce(Vector3.down * extraFallForce, ForceMode.Acceleration);
+
+                          Vector3 rayOrigin = transform.position + Vector3.up * 0.25f;
+                          float rayDistance = landingCheckDistance + 1f;
+                          if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, rayDistance))
+                          {
+                             if (hit.normal.y > 0.7f)
+                             {
+                                 landTime += Time.deltaTime;
+                                 if (landTime >= landingSettleTime)
+                                 {
+                                     LandOnGround(hit.point);
+                                 }
+                             }
+                             else
+                             {
+                                 landTime = 0f;
+                             }
+                          }
+                          else
+                          {
+                              landTime = 0f;
+                          }
+                      }
+
+                      UpdateStringRenderer();
+                  }
+
+                  private void StartDrop()
+                  {
+                     // de vijand is nu klaar om te vallen
+                     isDescending = false;
+                     isDropping = true;
+                     landTime = 0f;
+
+                     if (rb != null)
+                     {
+                         rb.isKinematic = false;
+                         rb.useGravity = true;
+                         rb.linearVelocity = Vector3.zero;
+                     }
+
+                     if (agent != null)
+                         agent.enabled = false;
+
+                     if (lineRenderer != null)
+                         lineRenderer.positionCount = 2;
+                  }
+
+                  private void LandOnGround(Vector3 contactPoint)
+                  {
+                     // wanneer de vijand de grond raakt, zet de positie vast en schakel de AI in
+                     if (!isDropping || hasLanded) return;
+
+                     hasLanded = true;
+                     isDropping = false;
+
+                     if (rb != null)
+                     {
+                         rb.isKinematic = true;
+                         rb.useGravity = false;
+                         rb.linearVelocity = Vector3.zero;
+                     }
+
+                     transform.position = new Vector3(transform.position.x, contactPoint.y, transform.position.z);
+
+                     if (agent != null)
+                     {
+                         agent.enabled = true;
+                         agent.Warp(transform.position);
+                         agent.ResetPath();
+                         agent.isStopped = false;
+                     }
+
+                     if (enemyAI != null)
+                         enemyAI.enabled = true;
+
+                     if (lineRenderer != null)
+                         lineRenderer.enabled = false;
+                  }
+
+                  private void UpdateStringRenderer()
+                  {
+                     // update de lijn die de spawnpositie verbindt met de vijand
+                     if (lineRenderer == null || !showString) return;
+
+                     if (hasLanded)
+                     {
+                         lineRenderer.enabled = false;
+                         return;
+                     }
+
+                     lineRenderer.enabled = true;
+                     Vector3 topPoint = groundPosition + Vector3.up * spawnHeight;
+                     lineRenderer.SetPosition(0, topPoint);
+                     lineRenderer.SetPosition(1, transform.position);
+                  }
+                }
+
+                  </code></pre>
+        </details>
+
+
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white-20 mb-4">
+                    </p>
+                    <div>
+                        Level Exit Gate
+                    </div>
+                </h2>
+                <hr class="divider divider-light" />
+                <p class="text-white-20 mb-4"></p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <p class="text-white-20 mb-4"></p>
+                <div>
+                    Dit script beheert een uitgangspoort van het level. 
+                    De poort blijft gesloten totdat deze wordt geopend. 
+                    Wanneer de speler door de geopende poort loopt, wordt het volgende level geladen.
+                </div>
+                </p>
+                <hr class="divider divider-light" />
+                <p class="text-white-20 mb-4"></p>
+            </div>
+        </div>
+        <details class="code-tab mt-4">
+            <summary>Show Level Exit Gate Script</summary>
+            <pre><code class="language-csharp">
+                public class LevelExitGate : MonoBehaviour
+                {
+                   [Header("Visuals")]
+                   [SerializeField] private GameObject closedVisual;
+                   [SerializeField] private GameObject openVisual;
+                   [SerializeField] private int gateLayoutIndex = -1;
+    
+                   private bool isGateOpen = false;
+
+                   private void Awake()
+                   {
+                      isGateOpen = false;
+                      // Start with the gate closed
+                      if (closedVisual != null) closedVisual.SetActive(true);
+                      if (openVisual != null) openVisual.SetActive(false);
+        
+                      // Ensure this GameObject has a trigger collider
+                      Collider gateCollider = GetComponent<Collider>();
+                      if (gateCollider != null)
+                      {
+                          Debug.Log($"LevelExitGate: Gate {gateLayoutIndex} collider found. Is Trigger: {gateCollider.isTrigger}");
+                      }
+                      else
+                      {
+                          Debug.LogError($"LevelExitGate: Gate {gateLayoutIndex} is MISSING a Collider! Add a collider and set 'Is Trigger' to true.");
+                      }
+                   }
+
+                   public int GetGateLayoutIndex() => gateLayoutIndex;
+
+                   public void OpenGate()
+                   {
+                      isGateOpen = true;
+        
+                      if (closedVisual != null) closedVisual.SetActive(false);
+                      if (openVisual != null) openVisual.SetActive(true);
+        
+                      Debug.Log($"LevelExitGate: Gate {gateLayoutIndex} is now open! Proceed when ready.");
+                   }
+
+                   private void OnTriggerEnter(Collider other)
+                   {
+                      Debug.Log($"GATE TRIGGER! Other: {other.gameObject.name}, Tag: {other.tag}, Gate Open: {isGateOpen}");
+        
+                      if (isGateOpen && other.CompareTag("Player"))
+                      {
+                          isGateOpen = false;
+                          Debug.Log("Player entered the gate. Loading next level...");
+            
+                          NextLevelManager manager = NextLevelManager.ResolveInstance();
+                          if (manager != null)
+                          {
+                              Debug.Log("LevelExitGate: Manager found. Calling ProceedToNextLevel().");
+                              manager.ProceedToNextLevel();
+                          }
+                          else
+                          {
+                              Debug.LogWarning("LevelExitGate: Manager could not be resolved.");
+                          }
+                      }
+                      else
+                      {
+                         if (!isGateOpen)
+                             Debug.Log($"Gate {gateLayoutIndex} is NOT open yet.");
+                         if (!other.CompareTag("Player"))
+                             Debug.Log($"Collider '{other.gameObject.name}' is not tagged as 'Player'.");
+                      }
+                   }
+                }
+
+                  </code></pre>
+        </details>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <p class="text-white-20 mb-4"></p>
+                <div>
+
+                </div>
+                </p>
+                <hr class="divider divider-light" />
+                <p class="text-white-20 mb-4"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+        <div class="text-center mt-4">
+            <a href="https://github.com/Roman220287/Portfolio_code/tree/main/Picto" target="_blank"
+                class="btn btn-dark btn-lg">
+                View code on GitHub
+            </a>
+        </div>
+
+
+        <!-- Footer-->
+
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>
